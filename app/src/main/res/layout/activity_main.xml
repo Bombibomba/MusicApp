@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/animated_background">
+
+    <!-- Верхняя панель с поиском -->
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/btn_menu"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+           />
+
+        <EditText
+            android:id="@+id/search_field"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:hint="Поиск музыки..."
+            android:textColor="#FFFFFF"
+            android:textColorHint="#B3B3B3"
+            android:background="@drawable/search_background"
+            android:paddingLeft="16dp"
+
+            android:drawableTint="#B3B3B3"/>
+
+        <ImageButton
+            android:id="@+id/btn_profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            />
+    </LinearLayout>
+
+    <!-- Вкладки -->
+    <HorizontalScrollView
+        android:id="@+id/tabs_container"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/top_bar"
+        android:background="#1E1E1E"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/tabs"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tab_home"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Главная"
+                android:textColor="#FFFFFF"
+                android:gravity="center"
+                android:padding="16dp"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tab_playlists"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Плейлисты"
+                android:textColor="#B3B3B3"
+                android:gravity="center"
+                android:padding="16dp"
+                android:textSize="14sp"/>
+
+            <!-- Добавьте другие вкладки по аналогии -->
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Основной контент -->
+    <FrameLayout
+        android:id="@+id/content_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/mini_player"
+        android:layout_below="@id/tabs_container">
+
+        <!-- Здесь будет меняться контент в зависимости от вкладки -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Пример блока с рекомендациями -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Рекомендуем вам"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:padding="16dp"/>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="16dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <!-- Пример карточки трека -->
+                        <LinearLayout
+                            android:layout_width="160dp"
+                            android:layout_height="200dp"
+                            android:orientation="vertical"
+                            android:layout_marginLeft="16dp">
+
+                            <ImageView
+                                android:layout_width="160dp"
+                                android:layout_height="160dp"
+
+                                android:scaleType="centerCrop"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Название трека"
+                                android:textColor="#FFFFFF"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:paddingTop="8dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Исполнитель"
+                                android:textColor="#B3B3B3"
+                                android:maxLines="1"
+                                android:ellipsize="end"/>
+                        </LinearLayout>
+
+                        <!-- Добавьте другие карточки по аналогии -->
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <!-- Другие блоки контента -->
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+
+    <!-- Мини-плеер -->
+    <LinearLayout
+        android:id="@+id/mini_player"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:background="#1E1E1E"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/mini_cover"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="12dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/mini_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Название трека"
+                android:textColor="#FFFFFF"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/mini_artist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Исполнитель"
+                android:textColor="#B3B3B3"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btn_play_pause"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            />
+    </LinearLayout>
+</RelativeLayout>
