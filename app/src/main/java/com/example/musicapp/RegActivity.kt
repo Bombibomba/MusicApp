@@ -5,9 +5,11 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -38,11 +40,16 @@ class RegActivity : AppCompatActivity() {
         val RePassword: EditText = findViewById(R.id.passwordReInput)
         val regButton: Button = findViewById(R.id.regButton)
         val loginLink: TextView = findViewById(R.id.loginLink)
+        val togglePasswordVisibility: ImageView = findViewById(R.id.togglePasswordVisibility)
+        val toggleRePasswordVisibility: ImageView = findViewById(R.id.toggleRePasswordVisibility)
 
         regButton.setOnClickListener {
             val cond: Boolean = validateLogin(Login)&&validateMail(Mail)&&validatePassword(Password)&&validateRePassword(Password,RePassword)
             if(validateLogin(Login) || validateMail(Mail) || validatePassword(Password) || validateRePassword(Password,RePassword)){
                 Toast.makeText(this,"Пользователь авторизован!", Toast.LENGTH_LONG).show()
+                val user = User(Login.text.toString(),Mail.text.toString(),Password.text.toString())
+                val db = DbHelper(this,null)
+                db.addUser(user)
             }else{
                 Toast.makeText(this,"Пользователь НЕ авторизован!", Toast.LENGTH_LONG).show()
             }
@@ -52,6 +59,10 @@ class RegActivity : AppCompatActivity() {
             val intent = Intent(this,AuthActivity::class.java)
             startActivity(intent)
         }
+
+        setupPasswordToggle(Password,togglePasswordVisibility)
+        setupPasswordToggle(RePassword,toggleRePasswordVisibility)
+
     }
 
     // Устанавливаем параметры анимации
@@ -199,5 +210,25 @@ class RegActivity : AppCompatActivity() {
         } else {
             MakeErrGone(RePasswordText,errTextView)
             true}
+    }
+
+    fun setupPasswordToggle(editText: EditText, toggleImageView: ImageView) {
+        var isPasswordVisible = false
+
+        toggleImageView.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+
+            if (isPasswordVisible) {
+                // Показываем пароль
+                editText.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                toggleImageView.setImageResource(R.drawable.eye_visible)
+            } else {
+                // Скрываем пароль (точки)
+                editText.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                toggleImageView.setImageResource(R.drawable.eye_invisible)
+            }
+        }
     }
 }

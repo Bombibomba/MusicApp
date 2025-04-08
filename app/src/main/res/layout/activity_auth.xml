@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".AuthActivity">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/animatedBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,39 +25,58 @@
             android:textStyle="bold"
             android:layout_marginBottom="32dp" />
 
-        <EditText
-            android:id="@+id/loginInput"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Имя"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:backgroundTint="@color/white"
-            android:inputType="text"
-            android:layout_marginBottom="16dp" />
+            android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/loginError"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Неверное имя"
-            android:textColor="@color/red"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="20dp"
-            android:visibility="gone"/>
+            <EditText
+                android:id="@+id/loginInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/white"
+                android:hint="Имя"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
 
+            <TextView
+                android:id="@+id/loginError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Неверное имя"
+                android:textColor="@color/red"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone"/>
 
-        <EditText
-            android:id="@+id/passwordInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Пароль"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:backgroundTint="@color/white"
-            android:inputType="textPassword"
-            android:layout_marginBottom="24dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+                <EditText
+                    android:id="@+id/passwordInput"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Пароль"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:backgroundTint="@color/white"
+                    android:inputType="textPassword"
+                    android:layout_marginBottom="24dp" />
+
+                <ImageView
+                    android:id="@+id/togglePasswordVisibility"
+                    android:layout_width="wrap_content"
+                    android:layout_height="41dp"
+                    android:layout_alignEnd="@id/passwordInput"
+                    android:layout_alignBottom="@id/passwordInput"
+                    android:contentDescription="Показать/скрыть пароль"
+                    android:src="@drawable/eye_invisible" />
+            </LinearLayout>
+    </LinearLayout>
 
         <TextView
             android:id="@+id/passwordError"

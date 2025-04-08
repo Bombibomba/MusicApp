@@ -69,16 +69,30 @@
             android:layout_marginBottom="20dp"
             android:visibility="gone"/>
 
-        <EditText
-            android:id="@+id/passwordInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Пароль"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:backgroundTint="@color/white"
-            android:inputType="textPassword"
-            android:layout_marginBottom="24dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+            <EditText
+                android:id="@+id/passwordInput"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:hint="Пароль"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:backgroundTint="@color/white"
+                android:inputType="textPassword"
+                android:layout_marginBottom="24dp" />
+
+            <ImageView
+                android:id="@+id/togglePasswordVisibility"
+                android:layout_width="wrap_content"
+                android:layout_height="41dp"
+                android:layout_alignEnd="@id/passwordInput"
+                android:layout_alignBottom="@id/passwordInput"
+                android:contentDescription="Показать/скрыть пароль"
+                android:src="@drawable/eye_invisible" />
+    </LinearLayout>
 
         <TextView
             android:id="@+id/passwordError"
@@ -91,16 +105,30 @@
             android:layout_marginBottom="20dp"
             android:visibility="gone"/>
 
-        <EditText
-            android:id="@+id/passwordReInput"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Подтвердите пароль"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:backgroundTint="@color/white"
-            android:inputType="textPassword"
-            android:layout_marginBottom="24dp" />
+            android:orientation="horizontal" >
+            <EditText
+                android:id="@+id/passwordReInput"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:hint="Подтвердите пароль"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:backgroundTint="@color/white"
+                android:inputType="textPassword"
+                android:layout_marginBottom="24dp" />
+
+            <ImageView
+                android:id="@+id/toggleRePasswordVisibility"
+                android:layout_width="wrap_content"
+                android:layout_height="41dp"
+                android:layout_alignEnd="@id/passwordInput"
+                android:layout_alignBottom="@id/passwordInput"
+                android:contentDescription="Показать/скрыть пароль"
+                android:src="@drawable/eye_invisible" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/passwordReError"
