@@ -2,8 +2,11 @@ package com.example.musicapp
 
 import SessionManager
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.text.InputType
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -34,7 +37,7 @@ class AuthActivity : AppCompatActivity() {
         val togglePasswordVisibility: ImageView = findViewById(R.id.togglePasswordVisibility)
 
         val sessionManager = SessionManager(this)
-        val token = sessionManager.getAuthToken()
+        val token = null  //sessionManager.getAuthToken()
 
         if (token == null) {
 
@@ -44,10 +47,12 @@ class AuthActivity : AppCompatActivity() {
                     db.getUser(Login.text.toString().trim(), Password.text.toString().trim())
 
                 if (isReg) {
-                    sessionManager.saveAuthToken("user_jwt_token_here")
+                    sessionManager.saveAuthToken("user_token")
                     val MainIntent = Intent(this, MainActivity::class.java)
                     startActivity(MainIntent)
                 } else {
+                    val errTextView: TextView = findViewById(R.id.textViewError)
+                    errTextView.visibility = View.VISIBLE
                     Toast.makeText(this, "Пользователь не найден!", Toast.LENGTH_LONG).show()
                 }
             }
@@ -88,14 +93,10 @@ class AuthActivity : AppCompatActivity() {
             isPasswordVisible = !isPasswordVisible
 
             if (isPasswordVisible) {
-                // Показываем пароль
-                editText.inputType =
-                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
                 toggleImageView.setImageResource(R.drawable.eye_visible)
             } else {
-                // Скрываем пароль (точки)
-                editText.inputType =
-                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
                 toggleImageView.setImageResource(R.drawable.eye_invisible)
             }
         }
